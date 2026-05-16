@@ -2,7 +2,7 @@
 // LeuansMappingTool - Loads SAMP Map Editor objects into GTA SA via Cleo Redux
 // Standalone script, no menu or signal dependency.
 //
-// Run MapConverter.py first to prepare your map files.
+// Run MapConverter.py first to prepare your map files. 
 
 const INDEX_FILE = "cleo\\mapping\\index.ini";
 const MAX_FILES  = 128;
@@ -17,7 +17,9 @@ let spawnedObjects = [];
 function requestModel(modelId) {
     if (native("HAS_MODEL_LOADED", modelId)) return true;
     native("REQUEST_MODEL", modelId);
-    for (let t = 0; t < 30; t++) {
+    
+    // Se sube el límite a 500 frames para dar tiempo de carga a archivos pesados (Buildings)
+    for (let t = 0; t < 500; t++) {
         wait(0);
         if (native("HAS_MODEL_LOADED", modelId)) return true;
     }
